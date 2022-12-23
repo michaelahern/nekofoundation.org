@@ -1,5 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 
+import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as cloudfront_origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import * as iam from 'aws-cdk-lib/aws-iam';
@@ -32,17 +33,31 @@ export class NekoFoundationSite extends cdk.Stack {
 
         new cdk.CfnOutput(this, 'NekoSiteBucketName', { value: nekoSiteBucket.bucketName });
 
+        // Certificate: nekofoundation.org
+        const nekoSiteCertificate = new acm.Certificate(this, 'NekoSiteCertificate', {
+            domainName: 'nekofoundation.org',
+            subjectAlternativeNames: ['www.nekofoundation.org'],
+            validation: acm.CertificateValidation.fromEmail({
+                ['nekofoundation.org']: 'nekofoundation.org',
+                ['www.nekofoundation.org']: 'nekofoundation.org'
+            })
+        });
+
+        new cdk.CfnOutput(this, 'NekoSiteCertificateArn', { value: nekoSiteCertificate.certificateArn });
+
         // CloudFront Distribution: nekofoundation.org
         const distribution = new cloudfront.Distribution(this, 'NekoSiteDistribution', {
             defaultBehavior: {
                 origin: new cloudfront_origins.S3Origin(nekoSiteBucket, { originAccessIdentity: nekoSiteOriginAccessIdentity }),
-                viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.ALLOW_ALL
+                viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS
             },
+            certificate: nekoSiteCertificate,
             defaultRootObject: "index.html",
-            //domainNames: ['www.nekofoundation.org']
+            domainNames: ['nekofoundation.org', 'www.nekofoundation.org']
         });
 
         new cdk.CfnOutput(this, 'NekoSiteDistributionId', { value: distribution.distributionId });
+        new cdk.CfnOutput(this, 'NekoSiteDistributionDomainName', { value: distribution.distributionDomainName });
 
         new s3deploy.BucketDeployment(this, 'NekoSiteBucketDeployment', {
             destinationBucket: nekoSiteBucket,
