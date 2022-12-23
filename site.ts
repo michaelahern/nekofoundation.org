@@ -1,12 +1,10 @@
 import * as cdk from 'aws-cdk-lib';
-
 import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as cloudfront_origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
-
 import { Construct } from 'constructs';
 
 export class NekoFoundationSite extends cdk.Stack {
@@ -22,6 +20,7 @@ export class NekoFoundationSite extends cdk.Stack {
             blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
             bucketName: 'nekofoundation.org',
             encryption: s3.BucketEncryption.S3_MANAGED,
+            enforceSSL: true,
             removalPolicy: cdk.RemovalPolicy.DESTROY
         });
 
@@ -52,8 +51,14 @@ export class NekoFoundationSite extends cdk.Stack {
                 viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS
             },
             certificate: nekoSiteCertificate,
-            defaultRootObject: "index.html",
-            domainNames: ['nekofoundation.org', 'www.nekofoundation.org']
+            defaultRootObject: 'index.html',
+            domainNames: ['nekofoundation.org', 'www.nekofoundation.org'],
+            errorResponses: [{
+                    httpStatus: 403,
+                    responseHttpStatus: 404,
+                    responsePagePath: '/index.html'
+            }],
+            priceClass: cloudfront.PriceClass.PRICE_CLASS_100
         });
 
         new cdk.CfnOutput(this, 'NekoSiteDistributionId', { value: distribution.distributionId });
