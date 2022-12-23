@@ -55,7 +55,8 @@ export class NekoFoundationSite extends cdk.Stack {
             domainNames: ['nekofoundation.org', 'www.nekofoundation.org'],
             errorResponses: [{
                 httpStatus: 403,
-                responseHttpStatus: 404
+                responseHttpStatus: 404,
+                responsePagePath: '/index.html'
             }],
             priceClass: cloudfront.PriceClass.PRICE_CLASS_100
         });
