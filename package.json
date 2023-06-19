@@ -12,7 +12,7 @@
     "clean": "rimraf ./cdk.out ./dist"
   },
   "dependencies": {
-    "aws-cdk-lib": "~2.58"
+    "aws-cdk-lib": "~2.80"
   },
   "devDependencies": {
     "@types/node": "~18",
