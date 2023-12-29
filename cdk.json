@@ -7,5 +7,6 @@
     "@aws-cdk/core:validateSnapshotRemovalPolicy": true,
     "@aws-cdk/aws-iam:minimizePolicies": true,
     "@aws-cdk/aws-iam:standardizedServicePrincipals": true
-  }
+  },
+  "requireApproval": "never"
 }
