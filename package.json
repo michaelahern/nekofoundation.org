@@ -1,6 +1,6 @@
 {
   "name": "nekofoundation.org",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "scripts": {
     "eslint": "eslint src/**.ts --max-warnings=0",
     "eslint-fix": "eslint src/**.ts --max-warnings=0 --fix",
@@ -12,16 +12,16 @@
     "clean": "rimraf ./cdk.out ./dist"
   },
   "dependencies": {
-    "aws-cdk-lib": "~2.115"
+    "aws-cdk-lib": "^2"
   },
   "devDependencies": {
-    "@types/node": "~20",
-    "@typescript-eslint/eslint-plugin": "~6.16",
-    "@typescript-eslint/parser": "~6.16",
-    "aws-cdk": "~2.115",
-    "eslint": "~8.56",
-    "rimraf": "~5.0",
-    "ts-node": "~10.9",
-    "typescript": "~5.3"
+    "@types/node": "^20",
+    "@typescript-eslint/eslint-plugin": "^7",
+    "@typescript-eslint/parser": "^7",
+    "aws-cdk": "^2",
+    "eslint": "^8",
+    "rimraf": "^5",
+    "ts-node": "^10",
+    "typescript": "~5.4"
   }
 }
