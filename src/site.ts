@@ -68,7 +68,7 @@ export class NekoFoundationSite extends cdk.Stack {
             destinationBucket: nekoSiteBucket,
             sources: [s3deploy.Source.asset('./site-contents')],
             distribution,
-            distributionPaths: ['/*'],
+            distributionPaths: ['/*']
         });
     }
 }

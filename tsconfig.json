@@ -2,13 +2,14 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "target": "es2022",
-    "module": "commonjs",
-    "lib": ["es2022"],
+    "module": "es2022",
+    "moduleResolution": "node",
+    "strict": true,
+    "rootDir": "src",
     "outDir": "dist",
     "declaration": true,
     "declarationMap": true,
-    "sourceMap": true,
-    "strict": true
+    "sourceMap": true
   },
-  "include": ["src/"]
+  "include": ["src"]
 }
