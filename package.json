@@ -1,6 +1,5 @@
 {
   "name": "nekofoundation.org",
-  "type": "module",
   "version": "1.0.0",
   "scripts": {
     "eslint": "eslint src/**.ts --max-warnings=0",
