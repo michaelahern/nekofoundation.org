@@ -1,0 +1,13 @@
+/*
+  Cache-Control: public, max-age=3600
+  Content-Security-Policy: default-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests;
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+
+https://:worker.:subdomain.workers.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.:subdomain.workers.dev/*
+  X-Robots-Tag: noindex

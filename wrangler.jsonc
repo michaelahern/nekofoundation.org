@@ -1,0 +1,18 @@
+{
+  "name": "nekofoundation",
+  "compatibility_date": "2025-08-15",
+  "assets": {
+    "directory": "./public/",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    {
+      "pattern": "nekofoundation.org",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.nekofoundation.org",
+      "custom_domain": true
+    }
+  ]
+}
